@@ -1,0 +1,41 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: doks-cert-to-pipeline-env
+spec:
+  schedule: "* * */2 * *"
+  successfulJobsHistoryLimit: 2
+  failedJobsHistoryLimit: 2  
+  jobTemplate:
+    spec:
+      backoffLimit: 4
+      template:
+        spec:
+          #serviceAccountName: 
+          terminationGracePeriodSeconds: 0
+          restartPolicy: Never
+          containers:
+          - name: doks-cert-to-pipeline-env
+            imagePullPolicy: IfNotPresent
+            image: djordjeparovic/doks-cert-to-pipeline-env:v0.1
+            env:
+            - name: CODE_COLLABORATION_TOOL
+              value: bitbucket
+            - name: DIGITALOCEAN_ACCESS_TOKEN
+              value: CHANGE-ME
+            - name: BITBUCKET_USERNAME
+              value: CHANGE-ME
+            - name: BITBUCKET_PASSWORD
+              value: CHANGE-ME
+            - name: BITBUCKET_TEAM
+              value: CHANGE-ME
+            - name: REPO_SLUG
+              value: CHANGE-ME
+            - name: VARIABLE_NAME
+              value: CHANGE-ME
+            - name: VARIABLE_PROTECTED
+              value: "true"
+            - name: DOKS_NAME
+              value: CHANGE-ME
+            - name: VERBOSE
+              value: "false"
