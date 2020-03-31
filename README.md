@@ -1,3 +1,5 @@
+![docker pulls](https://img.shields.io/docker/pulls/djordjeparovic/doks-cert-to-pipeline-env.svg)
+
 # Foreword
 This project is in very early stage and you can use it at your own risk only. It does not implement any security measures, but completely relies on your security setup.
 
